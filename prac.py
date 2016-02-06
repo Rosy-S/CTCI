@@ -78,6 +78,9 @@ class Node(object):
 	def setData(self, data): 
 		self.data = data
 
+	def __str__(self): 
+		return "Node Object <data = %s next = %s>" % (self.data, self.next)
+
 class LL(object): 
 	def __init__(self): 
 		self.head = None
@@ -117,18 +120,47 @@ class LL(object):
 			previous = current
 			current = current.next 
 
-	def removeDupes(self): 
-		dupe_dict = {}
+	def removeMiddle(self, c): 
 		current = self.head
 		previous = None
-		while current is not None: 
-			print dupe_dict
-			if current.data in dupe_dict: 
-				self.removeNode(current.data)
+
+		while current.next is not None: 
+			if current.data == c: 
+				print "IM in this loop"
+				previous.next = current.next
+				current = current.next.next
 			else: 
-				dupe_dict[current.data] = 1
-			previous = current
-			current = current.next
+				print "I'm in the else"
+				previous = current
+				current = current.next
+
+	# def removeDupes(self): 
+	# 	dupe_dict = {}
+	# 	current = self.head
+	# 	previous = None
+	# 	while current is not None: 
+	# 		print dupe_dict
+	# 		if current.data in dupe_dict: 
+	# 			self.removeNode(current.data)
+	# 		else: 
+	# 			dupe_dict[current.data] = 1
+	# 		previous = current
+	# 		current = current.next
+
+	def removeDupes(self): 
+		result_list = [self.head.data]
+		current = self.head.next
+		previous = self.head
+		while current is not None: 
+			if current.data in result_list: 
+				previous.next = current.next
+				current = current.next.next
+			else: 
+				result_list.append(current.data)
+				previous = current
+				current = current.next 
+
+
 
 
 
@@ -138,13 +170,13 @@ test.addNode(1)
 test.addNode(2)
 test.addNode(3)
 test.addNode(4)
-test.addNode(3)
 test.addNode(5)
 test.addNode(6)
 test.addNode(7)
-test.addNode(6)
 test.addNode(8)
-
+test.addNode(9)
+print str(test)
+print test.removeMiddle(5)
 # test.removeDupes()
 
 
