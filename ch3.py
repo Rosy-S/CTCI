@@ -1,3 +1,66 @@
+
+
+#2) Design a stack which, in addition to push and pop, has a function min which 
+# returns the minimum element in the stack.
+
+class StackWithMin: 
+    def __init__(self): 
+        self.stack = []
+        self.min = [float("inf")]
+
+    def get_min(self): 
+        if self.min[-1] == float("inf"): 
+            return "No Min"
+        else: 
+            return sef.min[-1]
+
+    def push(self, value): 
+        if value < self.min[-1]: 
+            self.min.append(value)
+        self.stack.append(value)
+
+    def pop(self): 
+        value = self.stack.pop()
+        if value == self.min[-1]: 
+            self.min.pop()
+        return value
+
+# test = StackWithMin()
+# [test.push(x) for x in '174836423']
+
+#***************************************************************************************
+#3) Implement a data structure SetOfStacks() that starts a new stack when the previous stack
+# exceeds some threshold
+
+class SetOfStacks: 
+    def __init__(self, size=100): 
+        self.capacity = size
+        self.current_stack = []
+        self.filled_stacks = []
+
+
+    def push(self, value): 
+        if len(self.current_stack) < self.capacity: 
+            self.current_stack.append(value)
+        else: 
+            old_stack = list(self.current_stack)
+            self.filled_stacks.append(old_stack)
+            self.current_stack = [value]
+
+    def SetPop(self): 
+        if len(self.current_stack) == 0 and not self.filled_stacks: 
+            return "Empty Stack"
+        elif len(self.current_stack) == 0: 
+            self.current_stack = self.filled_stacks.pop()
+        return self.current_stack.pop()
+
+# my_stack = SetOfStacks(10)
+# [my_stack.push(x) for x in range(1, 10)]
+
+#****************************************************************************************
+#4) Implement MyQueue class which implements a queue using two stacks
+
+
 class MyQueue(object):
     """
     Implements a queue using two stacks.
