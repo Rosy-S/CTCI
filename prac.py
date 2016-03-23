@@ -1,3 +1,18 @@
+def find_largest(grid, n): 
+	memo = [None] * (n * n)
+	count = 0
+	for i in range(n): 
+		for j in range(n): 
+			q = []
+			if j == n - 1: 
+				continue
+			else: 
+				if grid[i][j + 1] - grid[i][j] == 1: 
+
+
+
+
+
 class Stack:
 	 def __init__(self):
 		 self.items = []
@@ -165,19 +180,19 @@ class LL(object):
 
 
 
-test = LL()
-test.addNode(1)
-test.addNode(2)
-test.addNode(3)
-test.addNode(4)
-test.addNode(5)
-test.addNode(6)
-test.addNode(7)
-test.addNode(8)
-test.addNode(9)
-print str(test)
-print test.removeMiddle(5)
-# test.removeDupes()
+# test = LL()
+# test.addNode(1)
+# test.addNode(2)
+# test.addNode(3)
+# test.addNode(4)
+# test.addNode(5)
+# test.addNode(6)
+# test.addNode(7)
+# test.addNode(8)
+# test.addNode(9)
+# print str(test)
+# print test.removeMiddle(5)
+# # test.removeDupes()
 
 
 

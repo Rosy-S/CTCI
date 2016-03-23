@@ -105,30 +105,65 @@ class Node(object):
         return str(self.data)
         
 
-class Stack(object):
-    def __init__(self):
-        self.stack = Node()
-        self.size = 0
+# class Stack(object):
+#     def __init__(self):
+#         self.stack = Node()
+#         self.size = 0
 
-    def push(self, data):
-        self.stack = Node(data, self.stack)
-        self.size += 1
+#     def push(self, data):
+#         self.stack = Node(data, self.stack)
+#         self.size += 1
 
-    def pop(self):
-        assert self.stack.data is not None, 'Stack is empty'
-        value = self.stack.data
-        self.stack.data = self.stack.nextNode.data
-        self.stack.nextNode = self.stack.nextNode.nextNode
-        self.size -= 1
-        return value
+#     def pop(self):
+#         assert self.stack.data is not None, 'Stack is empty'
+#         value = self.stack.data
+#         self.stack.data = self.stack.nextNode.data
+#         self.stack.nextNode = self.stack.nextNode.nextNode
+#         self.size -= 1
+#         return value
     
-    def peek(self):
-        assert self.size > 0, 'Stack is empty'
-        return self.stack.data
+#     def peek(self):
+#         assert self.size > 0, 'Stack is empty'
+#         return self.stack.data
 
-    def __str__(self):
-        stack_copy = deepcopy(self)
-        tempHolder = []
-        while stack_copy.size > 0:
-            tempHolder.append(stack_copy.pop())
-        return ', '.join(map(str, tempHolder[::-1]))
+#     def __str__(self):
+#         stack_copy = deepcopy(self)
+#         tempHolder = []
+#         while stack_copy.size > 0:
+#             tempHolder.append(stack_copy.pop())
+#         return ', '.join(map(str, tempHolder[::-1]))
+
+#****************************************************************************************
+#5) Write a program to sort a stack such that the smallest items are on the top. You can use a 
+# temporary stack. 
+
+class Stack(list):
+    def peak(self):
+        return self[-1]
+    def push(self, item):
+        self.append(item)
+    def empty(self):
+        return len(self) == 0
+
+
+
+def sort_stack(s):
+    r = Stack()
+    while not s.empty():            
+        tmp = s.pop()
+        while not r.empty() and r.peak() > tmp:
+            s.push(r.pop())
+        r.push(tmp)
+        while not s.empty() and s.peak() >= r.peak():
+            #warning, >= here
+            r.push(s.pop())
+    return r
+
+from random import randrange
+test_items = [randrange(20) for x in xrange(20)]
+print test_items
+S = Stack()
+for item in test_items:
+    S.push(item)
+# S = sort_stack(S)
+print S
